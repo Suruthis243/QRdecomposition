@@ -31,28 +31,33 @@ RegisterNumber: 212224220114
 '''
 import numpy as np
 def QR_Decomposition(A):
-    n,m=A.shape
+    n,m= A.shape
+    
     Q=np.empty((n,n))
-    U=np.empty((n,n))
-    U[:,0]=A[:,0]
-    Q[:,0]=U[:,0]/np.linalg.norm( U[:,0])
+    u=np.empty((n,n))
+    
+    u[:,0]=A[:,0]
+    Q[:,0]=u[:,0]/np.linalg.norm(u[:, 0])
+    
     for i in range(1,n):
-        U[:,i]=A[:,i]
+        u[:,i]=A[:,i]
         for j in range(i):
-            U[:,i]-=(A[:,i]@Q[:,j])*Q[:,j]
-        Q[:,i]=U[:,i]/np.linalg.norm(U[:,i])
-        R=np.zeros((n,m))
+            u[:,i]-=A[:,i]@Q[:,j]*Q[:,j]
+        Q[:,i]=u[:,i]/np.linalg.norm(u[:,i])
+    R=np.zeros((n,m))
     for i in range(n):
         for j in range(i,m):
             R[i,j]=A[:,j]@Q[:,i]
-    print(Q)
-    print(R)
-a = np.array(eval(input()))
-QR_Decomposition(a)
+            
+    print("The Q Matrix is\n",Q)
+    print("The R Matrix is\n",R)
+A=np.array(eval(input()))
+QR_Decomposition(A)
 ```
 ## Output
+![image](https://github.com/user-attachments/assets/1b3440fe-0efb-4c66-aff4-f368672b36f9)
 
-![Screenshot 2025-05-27 114135](https://github.com/user-attachments/assets/8b2b343a-dc31-40c1-bccd-81d1d5442f9e)
+
 
 
 ## Result
